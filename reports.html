@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dangal E-Library — Reports</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <nav class="els-nav">
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+    <a href="dashboard.html" class="brand brand-center">
+      <div class="brand-logo brand-logo-gray">
+        <img src="Logo.png" alt="Logo">
+      </div>
+    </a>
+    <div class="nav-actions">
+      <span class="nav-user">
+        <span class="user-name">—</span> &middot; <span class="user-role">—</span>
+      </span>
+      <button class="els-btn-nav-out" id="logoutBtn">Sign Out</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar-icon"></div>
+        <div class="u-name user-name">—</div>
+        <div class="u-role user-role">—</div>
+        <div class="u-id user-id">—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html"><span class="nav-icon" id="nav-books-icon"></span> Books</a>
+        <a href="profile.html"><span class="nav-icon" id="nav-profile-icon"></span> My Profile</a>
+        <a href="reports.html" class="active"><span class="nav-icon" id="nav-reports-icon"></span> Reports</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+
+      <!-- Greeting Banner -->
+      <div class="dangal-greeting mb-4">
+        <div class="dangal-greeting-text">
+          <div class="dangal-welcome">Welcome to</div>
+          <div class="dangal-title">Dangal E-Library</div>
+          <div class="dangal-sub">Pamantasan ng Cabuyao — Library Management System</div>
+        </div>
+        <div class="dangal-greeting-logo">
+          <img src="Logo.png" alt="Logo">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <h4 style="font-family:'Playfair Display',serif;margin:0">Reports &amp; Analytics</h4>
+        <p style="font-size:.82rem;color:var(--text-muted);margin:0">Borrowing history and library statistics</p>
+      </div>
+
+      <!-- Stats grid -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="stat_borrows">0</div>
+          <div class="stat-label">Total Borrows</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat_returns">0</div>
+          <div class="stat-label">Total Returns</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat_active">0</div>
+          <div class="stat-label">Active Borrows</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat_books">0</div>
+          <div class="stat-label">Book Titles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat_copies">0</div>
+          <div class="stat-label">Total Copies</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat_avail">0</div>
+          <div class="stat-label">Available Now</div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-6">
+          <div class="card-panel h-100">
+            <h6><span id="trophy-icon"></span> Most Borrowed Books</h6>
+            <ul class="list-group list-group-flush" id="mostBorrowedList"></ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-panel h-100">
+            <h6><span id="activity-icon"></span> Recent Activity</h6>
+            <ul class="list-group list-group-flush" id="recentActivity" style="font-size:.82rem"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full transaction history -->
+      <div class="card-panel">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h6 class="mb-0"><span id="clipboard-icon"></span> Full Transaction History</h6>
+          <div class="d-flex gap-2">
+            <input type="text" id="historySearch" class="els-input" placeholder="Search…"
+              style="width:200px;border-radius:8px">
+            <select id="historyFilter" class="els-input" style="width:140px;border-radius:8px">
+              <option value="">All Types</option>
+              <option value="borrow">Borrowed</option>
+              <option value="return">Returned</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table els-table mb-0" id="fullHistoryTable">
+            <thead>
+              <tr>
+                <th>TX ID</th>
+                <th>User</th>
+                <th>Book</th>
+                <th>Copy</th>
+                <th>Type</th>
+                <th>Date &amp; Time</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="icons.js"></script>
+  <script src="storage.js"></script>
+  <script src="models.js"></script>
+  <script src="userManager.js"></script>
+  <script src="bookManager.js"></script>
+  <script src="transactionManager.js"></script>
+  <script src="utils.js"></script>
+  <script src="login.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="profile.js"></script>
+  <script src="reports.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
